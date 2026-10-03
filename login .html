@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game.18</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 75px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 7%;
+            background: #0d0d0d;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo span {
+            color: #00ff88;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #aaa;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+
+        .login-btn {
+            border: 1px solid #00ff88;
+            padding: 10px 20px;
+            border-radius: 7px;
+            color: #00ff88 !important;
+        }
+
+        .login-btn:hover {
+            background: #00ff88;
+            color: black !important;
+        }
+
+        .register-btn {
+            background: #00ff88;
+            color: black !important;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        /* ================= HOME ================= */
+
+        .home {
+            min-height: calc(100vh - 75px);
+        }
+
+        .hero {
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 8%;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .small-text {
+            color: #00ff88;
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #00ff88;
+        }
+
+        .hero p {
+            color: #999;
+            line-height: 1.7;
+            font-size: 17px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .main-btn,
+        .outline-btn {
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .main-btn {
+            background: #00ff88;
+            color: black;
+        }
+
+        .outline-btn {
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .outline-btn:hover {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+
+        .hero-visual {
+            width: 330px;
+            height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earning-box {
+            width: 260px;
+            height: 260px;
+            border: 1px solid #333;
+            border-radius: 25px;
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 60px rgba(0, 255, 136, 0.08);
+        }
+
+        .coin {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #00ff88;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .earning-box h3 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .earning-box p {
+            color: #777;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        .section {
+            padding: 80px 8%;
+            text-align: center;
+            border-top: 1px solid #151515;
+        }
+
+        .section h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .section > p {
+            color: #888;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 45px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            width: 260px;
+            padding: 30px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 15px;
+        }
+
+        .step-number {
+            color: #00ff88;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        /* ================= FAQ ================= */
+
+        .faq {
+            max-width: 800px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+
+        .faq-item {
+            background: #111;
+            border: 1px solid #222;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 20px 20px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #666;
+        }
+
+        footer span {
+            color: #00ff88;
+        }
+
+        /* ================= LOGIN POPUP ================= */
+
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-overlay.active {
+            display: flex;
+        }
+
+        .login-box {
+            width: 420px;
+            max-width: 90%;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 18px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.08);
+        }
+
+        .close-login {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .close-login:hover {
+            color: white;
+        }
+
+        .login-logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .login-logo span {
+            color: #00ff88;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background: #191919;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #00ff88;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 65px;
+        }
+
+        #showPassword {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #00ff88;
+            cursor: pointer;
+        }
+
+        .login-submit {
+            width: 100%;
+            padding: 14px;
+            background: #00ff88;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-submit:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        #loginMessage {
+            text-align: center;
+            margin-top: 15px;
+            color: #ff5555;
+            font-size: 14px;
+        }
+
+        .login-bottom {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .login-bottom button {
+            background: none;
+            border: none;
+            color: #00ff88;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        /* ================= BLACK GAME PAGE ================= */
+
+        .game-page {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: none;
+            z-index: 2000;
+        }
+
+        .game-page.active {
+            display: block;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links a:not(.login-btn):not(.register-btn) {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HOME PAGE ================= -->
+
+    <div class="home" id="homePage">
+
+        <!-- NAVBAR -->
+
+        <nav>
+
+            <div class="logo">
+                Game<span>.18</span>
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#homePage">Home</a>
+                <a href="#how">How It Works</a>
+                <a href="#faq">FAQ</a>
+
+                <a href="#" class="login-btn" id="loginBtn">
+                    Login
+                </a>
+
+                <a href="#" class="register-btn" id="registerBtn">
+                    Create Account
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="small-text">
+                    WELCOME TO GAME.18
+                </div>
+
+                <h1>
+                    PLAY GAMES.<br>
+                    <span>EARN REWARDS.</span>
+                </h1>
+
+                <p>
+                    Game.18 is a reward-based gaming platform
+                    where players can play, compete and earn
+                    rewards through our gaming ecosystem.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#" class="main-btn" id="heroLogin">
+                        Get Started
+                    </a>
+
+                    <a href="#how" class="outline-btn">
+                        How It Works
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="earning-box">
+
+                    <div class="coin">
+                        ₹
+                    </div>
+
+                    <h3>
+                        Rewards
+                    </h3>
+
+                    <p>
+                        Play • Compete • Earn
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+
+        <section class="section" id="how">
+
+            <h2>
+                How It Works
+            </h2>
+
+            <p>
+                Simple steps to get started
+            </p>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Register
+                    </h3>
+
+                    <p>
+                        Create your Game.18 account
+                        and get started.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Play
+                    </h3>
+
+                    <p>
+                        Play eligible games and
+                        compete with other players.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Earn
+                    </h3>
+
+                    <p>
+                        Earn rewards according to
+                        the platform's reward system.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FAQ -->
+
+        <section class="section" id="faq">
+
+            <h2>
+                Frequently Asked Questions
+            </h2>
+
+            <div class="faq">
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        What is Game.18?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        Game.18 is a reward-based gaming platform.
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        How does it work?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        Users can register, play eligible games
+                        and participate according to the platform
+                        rules.
+                    </div>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        Can I create an account?
+                        <span>+</span>
+                    </div>
+
+                    <div class="faq-answer">
+                        Yes. Use the Create Account option to
+                        begin registration.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            © 2026 <span>Game.18</span> — All Rights Reserved
+
+        </footer>
+
+    </div>
+
+
+    <!-- ================= LOGIN POPUP ================= -->
+
+    <div class="login-overlay" id="loginOverlay">
+
+        <div class="login-box">
+
+            <button class="close-login" id="closeLogin">
+                &times;
+            </button>
+
+            <div class="login-logo">
+                Game<span>.18</span>
+            </div>
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p class="login-subtitle">
+                Login to continue to Game.18
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="input-group">
+
+                    <label>
+                        Username or Email
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Enter username or email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="showPassword">
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-submit">
+
+                    Login
+
+                </button>
+
+
+                <p id="loginMessage"></p>
+
+            </form>
+
+
+            <div class="login-bottom">
+
+                Don't have an account?
+
+                <button type="button" id="createAccount">
+                    Create Account
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= BLACK GAME PAGE ================= -->
+
+    <section class="game-page" id="gamePage">
+
+        <!--
+            ABHI YE PAGE COMPLETELY BLACK HAI.
+
+            BAAD MEIN YAHAN:
+            - Games
+            - Wallet
+            - Balance
+            - Profile
+            - Rewards
+            - etc.
+            ADD KARENGE.
+        -->
+
+    </section>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        // LOGIN ELEMENTS
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const heroLogin =
+            document.getElementById("heroLogin");
+
+        const loginOverlay =
+            document.getElementById("loginOverlay");
+
+        const closeLogin =
+            document.getElementById("closeLogin");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginUsername =
+            document.getElementById("loginUsername");
+
+        const loginPassword =
+            document.getElementById("loginPassword");
+
+        const showPassword =
+            document.getElementById("showPassword");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+        const gamePage =
+            document.getElementById("gamePage");
+
+        const homePage =
+            document.getElementById("homePage");
+
+
+        // =========================
+        // OPEN LOGIN
+        // =========================
+
+        function openLogin(event) {
+
+            event.preventDefault();
+
+            loginOverlay.classList.add("active");
+
+        }
+
+
+        loginBtn.addEventListener(
+            "click",
+            openLogin
+        );
+
+
+        heroLogin.addEventListener(
+            "click",
+            openLogin
+        );
+
+
+        // =========================
+        // CLOSE LOGIN
+        // =========================
+
+        closeLogin.addEventListener(
+            "click",
+            function() {
+
+                loginOverlay.classList.remove("active");
+
+            }
+        );
+
+
+        // =========================
+        // SHOW / HIDE PASSWORD
+        // =========================
+
+        showPassword.addEventListener(
+            "click",
+            function() {
+
+                if (
+                    loginPassword.type === "password"
+                ) {
+
+                    loginPassword.type = "text";
+
+                    showPassword.textContent =
+                        "Hide";
+
+                } else {
+
+                    loginPassword.type = "password";
+
+                    showPassword.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+
+        // =========================
+        // LOGIN
+        // =========================
+
+        loginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                const username =
+                    loginUsername.value.trim();
+
+                const password =
+                    loginPassword.value.trim();
+
+
+                if (
+                    username === "" ||
+                    password === ""
+                ) {
+
+                    loginMessage.textContent =
+                        "Please enter username and password.";
+
+                    return;
+
+                }
+
+
+                // LOGIN SUCCESS
+
+                loginMessage.textContent = "";
+
+
+                // CLOSE LOGIN
+
+                loginOverlay.classList.remove(
+                    "active"
+                );
+
+
+                // HIDE HOME
+
+                homePage.style.display =
+                    "none";
+
+
+                // SHOW BLACK GAME PAGE
+
+                gamePage.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        // =========================
+        // CREATE ACCOUNT
+        // =========================
+
+        document
+            .getElementById("createAccount")
+            .addEventListener(
+                "click",
+                function() {
+
+                    alert(
+                        "Create Account page hum next banayenge."
+                    );
+
+                }
+            );
+
+
+        document
+            .getElementById("registerBtn")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Create Account page hum next banayenge."
+                    );
+
+                }
+            );
+
+
+        // =========================
+        // FAQ
+        // =========================
+
+        const questions =
+            document.querySelectorAll(
+                ".faq-question"
+            );
+
+
+        questions.forEach(
+            function(question) {
+
+                question.addEventListener(
+                    "click",
+                    function() {
+
+                        const answer =
+                            this.nextElementSibling;
+
+                        answer.classList.toggle(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
